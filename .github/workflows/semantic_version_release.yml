@@ -20,12 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.NK_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         with:
-          semantic_version: 19
-
-      - name: Do something when a new release published
-        if: steps.semantic.outputs.new_release_published == 'true'
-        run: |
-          echo ${{ steps.semantic.outputs.new_release_version }}
+          semantic_version: 19      
 
       - name: Get changed files in the MoqAnalyzers folder
         id: changed-files-specific
@@ -39,5 +34,9 @@ jobs:
         run: |
           echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
           sed -i -e "s+<version>.*</version>+<version>${{ steps.semantic.outputs.new_release_version }}</version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
+
+       - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply ${{ steps.semantic.outputs.new_release_version }} version change in csproj file
 
       
