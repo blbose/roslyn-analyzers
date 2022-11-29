@@ -22,18 +22,30 @@ jobs:
         with:
           semantic_version: 19      
 
-      - name: Get changed files in the MoqAnalyzers folder
+      - name: Get changed files in the code analysis folder
         id: changed-files-specific
         uses: tj-actions/changed-files@v34
         with:
           files: |
+            Philips.CodeAnalysis.DuplicateCodeAnalyzer/**
+            Philips.CodeAnalysis.MaintainabilityAnalyzers/**
             Philips.CodeAnalysis.MoqAnalyzers/**
+
 
       - name: Run step if any file(s) in the MoqAnalyzers project change
         if: steps.changed-files-specific.outputs.any_changed == 'true'
-        run: |
-          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
-          sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
+          if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.DuplicateCodeAnalyzer')
+          run: |
+            sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.DuplicateCodeAnalyzer/Philips.CodeAnalysis.DuplicateCodeAnalyzer.csproj
+
+          if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MaintainabilityAnalyzers')
+          run: |
+            sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MaintainabilityAnalyzers/Philips.CodeAnalysis.MaintainabilityAnalyzers.csproj
+
+          if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MoqAnalyzers')
+          run: |
+            sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
+
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
