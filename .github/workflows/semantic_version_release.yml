@@ -33,7 +33,7 @@ jobs:
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
-          sed -i -e "s+<version>.*</version>+<version>${{ steps.semantic.outputs.new_release_version }}</version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
+          sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
