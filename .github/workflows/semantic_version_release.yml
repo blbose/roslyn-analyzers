@@ -38,6 +38,6 @@ jobs:
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
-          sed -i -e "s+<version>.*</version>+<version>${{ steps.semantic.outputs.new_release_version }}</version>+g" steps.changed-files.outputs.all_changed_files/steps.changed-files.outputs.all_changed_files.csproj
+          sed -i -e "s+<version>.*</version>+<version>${{ steps.semantic.outputs.new_release_version }}</version>+g" ${{ steps.changed-files.outputs.all_changed_files }}/${{ steps.changed-files.outputs.all_changed_files.csproj }}
 
       
