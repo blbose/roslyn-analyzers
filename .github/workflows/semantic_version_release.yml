@@ -32,19 +32,18 @@ jobs:
             Philips.CodeAnalysis.MoqAnalyzers/**
 
 
-      - name: Run step if any file(s) in the MoqAnalyzers project change
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
-          if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.DuplicateCodeAnalyzer')
-          run: |
-            sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.DuplicateCodeAnalyzer/Philips.CodeAnalysis.DuplicateCodeAnalyzer.csproj
+      - name: Run step if any file(s) in the MoqAnalyzers project change        
+        if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.DuplicateCodeAnalyzer')
+        run: |
+          sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.DuplicateCodeAnalyzer/Philips.CodeAnalysis.DuplicateCodeAnalyzer.csproj
 
-          if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MaintainabilityAnalyzers')
-          run: |
-            sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MaintainabilityAnalyzers/Philips.CodeAnalysis.MaintainabilityAnalyzers.csproj
+        if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MaintainabilityAnalyzers')
+        run: |
+          sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MaintainabilityAnalyzers/Philips.CodeAnalysis.MaintainabilityAnalyzers.csproj
 
-          if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MoqAnalyzers')
-          run: |
-            sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
+        if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MoqAnalyzers')
+        run: |
+          sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
 
 
       - uses: stefanzweifel/git-auto-commit-action@v4
