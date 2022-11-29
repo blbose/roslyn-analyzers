@@ -27,7 +27,7 @@ jobs:
         run: |
           echo ${{ steps.semantic.outputs.new_release_version }}
 
-      - name: Get changed files in the docs folder
+      - name: Get changed files in the MoqAnalyzers folder
         id: changed-files-specific
         uses: tj-actions/changed-files@v34
         with:
@@ -38,7 +38,6 @@ jobs:
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
-          echo ${{ steps.changed-files.outputs.all_changed_files }}/${{ steps.changed-files.outputs.all_changed_files }}.csproj
-          sed -i -e "s+<version>.*</version>+<version>${{ steps.semantic.outputs.new_release_version }}</version>+g" ${{ steps.changed-files.outputs.all_changed_files }}/${{ steps.changed-files.outputs.all_changed_files }}.csproj
+          sed -i -e "s+<version>.*</version>+<version>${{ steps.semantic.outputs.new_release_version }}</version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
 
       
