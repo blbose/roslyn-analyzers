@@ -9,7 +9,7 @@ jobs:
       - name : message check
         if:  ${{ !(startsWith(github.event.head_commit.message, 'feat') || startsWith(github.event.head_commit.message, 'fix')) }}
         run: |
-          echo "Commit meesage :: ${{ github.event.head_commit.message }} not prefixed with semantic version tags (BREAKING CHANGE: or feat: or fix:)"
+          echo "Commit message :: '${{ github.event.head_commit.message }}' not prefixed with semantic version tags (BREAKING CHANGE: or feat: or fix:)"
           exit 1      
 
   semantic-version-update-call:
