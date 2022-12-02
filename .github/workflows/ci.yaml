@@ -12,8 +12,8 @@ jobs:
           ref: ${{github.event.after}}
       - name: Get Commit Message
         run: |
-          MSG=$(git log --format=%B -n 1 ${{github.event.after}})
-          echo "::set-env name=COMMIT_MESSAGE::${MSG}"
+          commitmsg=$(git log --format=%B -n 1 ${{github.event.after}})
+          echo "{MSG}"
       - name: Echo commit message
         run: |
           echo "Commit SHA: ${{github.event.after}}, commit message: ${{env.COMMIT_MESSAGE}} (or ${COMMIT_MESSAGE})"
