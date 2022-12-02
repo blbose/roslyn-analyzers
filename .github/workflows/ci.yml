@@ -1,16 +1,11 @@
-on:
-  workflow_call:
-    inputs:
-      username:
-        description: 'A username passed from the caller workflow'
-        default: 'john-doe'
-        required: false
-        type: string
+on: [push]  
 
 jobs:
-  print-username:
-    runs-on: ubuntu-latest
+  semantic-version-update-call:
+    uses: blbose/roslyn-analyzers/blob/dev-bose-branch/.github/workflows/semantic_version_release.yml@latest
+    
+  dotnetcore-call:
+    needs: [semantic-version-update-call]
+    uses: https://github.com/blbose/roslyn-analyzers/blob/dev-bose-branch/.github/workflows/dotnetcore.yml@main
 
-    steps:
-      - name: Print the input name to STDOUT
-        run: echo The username is ${{ inputs.username }}
+    
