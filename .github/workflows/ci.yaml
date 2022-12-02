@@ -1,0 +1,9 @@
+on: [push]  
+
+jobs:
+  semantic-version-update-call:
+    uses: blbose/roslyn-analyzers/blob/dev-bose-branch/.github/workflows/semantic_version_release.yml@latest
+    
+  dotnetcore-call:
+    needs: [semantic-version-update-call]
+    uses: https://github.com/blbose/roslyn-analyzers/blob/dev-bose-branch/.github/workflows/dotnetcore.yml@main
