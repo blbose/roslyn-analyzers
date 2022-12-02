@@ -1,3 +1,17 @@
+## [1.2.33](https://github.com/blbose/roslyn-analyzers/compare/v1.2.32...v1.2.33) (2022-12-02)
+
+
+### Bug Fixes
+
+* List of files changed 22 ([c53223d](https://github.com/blbose/roslyn-analyzers/commit/c53223d642cf07433b8d12e1e66c982ef5119aec))
+* List of files changed 23 ([6f31aad](https://github.com/blbose/roslyn-analyzers/commit/6f31aad0f50aebe46ae4cdd399d2c54847050453))
+* List of files changed 24 ([fe2368b](https://github.com/blbose/roslyn-analyzers/commit/fe2368b164add7d0fe7097b40f600aeb0ea83e50))
+* List of files changed 25 ([f2a7754](https://github.com/blbose/roslyn-analyzers/commit/f2a7754d6abea9a2008a5a312be737395c512c49))
+* List of files changed 26 ([e631586](https://github.com/blbose/roslyn-analyzers/commit/e631586eab92aaa8142f7e89cc9203e337437da0))
+* List of files changed 27 ([5354e71](https://github.com/blbose/roslyn-analyzers/commit/5354e714b9fd90ca62f70735c89c9cb3b53bffd5))
+* List of files changed 29 ([713382d](https://github.com/blbose/roslyn-analyzers/commit/713382d383940d0f412cfee774240f375dbb7d1a))
+* List of files changed 30 ([fd1f1b3](https://github.com/blbose/roslyn-analyzers/commit/fd1f1b3f96d4fe318e7a38737aa47392eb4ee183))
+
 ## [1.2.32](https://github.com/blbose/roslyn-analyzers/compare/v1.2.31...v1.2.32) (2022-12-02)
 
 
