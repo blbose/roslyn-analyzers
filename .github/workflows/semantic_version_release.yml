@@ -11,6 +11,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name : message validation
+        if:  ${{ !(startsWith(github.event.head_commit.message, 'feat') || startsWith(github.event.head_commit.message, 'fix') || startsWith(github.event.head_commit.message, 'BREAKING CHANGE')) }}
+        run: |
+          echo "Commit message :: '${{ github.event.head_commit.message }}' not prefixed with semantic version tags (BREAKING CHANGE: or feat: or fix:)"
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v3
       - name: Semantic Release

@@ -1,19 +1,8 @@
 on: [push]  
 
-jobs:
-  commit-message-check:
-    runs-on: ubuntu-latest
-
-    steps:
-      
-      - name : message validation
-        if:  ${{ !(startsWith(github.event.head_commit.message, 'feat') || startsWith(github.event.head_commit.message, 'fix') || startsWith(github.event.head_commit.message, 'BREAKING CHANGE')) }}
-        run: |
-          echo "Commit message :: '${{ github.event.head_commit.message }}' not prefixed with semantic version tags (BREAKING CHANGE: or feat: or fix:)"
-          exit 1      
+jobs:     
 
   semantic-version-update-call:
-    needs: [commit-message-check]
     uses: ./.github/workflows/semantic_version_release.yml
     
   dotnetcore-call:
