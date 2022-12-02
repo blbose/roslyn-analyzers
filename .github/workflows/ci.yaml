@@ -14,7 +14,10 @@ jobs:
         run: |
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
           echo "${MSG}"
-      
+
+      - name : message check
+        if: ${{ !contains(MSG, 'feat') || !contains(MSG, 'fix') }}
+          run: exit 1      
 
   semantic-version-update-call:
     needs: [commit-message-check]
