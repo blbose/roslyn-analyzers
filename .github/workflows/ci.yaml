@@ -2,8 +2,8 @@ on: [push]
 
 jobs:
   semantic-version-update-call:
-    uses: .github/workflows/semantic_version_release.yml@latest
+    uses: blbose/roslyn-analyzers/.github/workflows/semantic_version_release.yml@latest
     
   dotnetcore-call:
     needs: [semantic-version-update-call]
-    uses: .github/workflows/dotnetcore.yml@main
+    uses: blbose/roslyn-analyzers/.github/workflows/dotnetcore.yml@main
