@@ -1,5 +1,6 @@
 {
     "private": true,
+    "version": "1.2.30",
     "name": "semantic-release-action",
     "release": {
         "branches": ["main","dev-bose-branch"],

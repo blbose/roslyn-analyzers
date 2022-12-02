@@ -27,27 +27,14 @@ jobs:
         uses: tj-actions/changed-files@v34
         with:
           files: |
-            Philips.CodeAnalysis.DuplicateCodeAnalyzer/**
             Philips.CodeAnalysis.MaintainabilityAnalyzers/**
-            Philips.CodeAnalysis.MoqAnalyzers/**
-
-
-      - name: Run step if any file(s) in the DuplicateCodeAnalyzer project change        
-        if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.DuplicateCodeAnalyzer')
-        run: |
-          sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.DuplicateCodeAnalyzer/Philips.CodeAnalysis.DuplicateCodeAnalyzer.csproj
 
       - name: Run step if any file(s) in the MaintainabilityAnalyzers project change 
         if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MaintainabilityAnalyzers')
         run: |
           sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MaintainabilityAnalyzers/Philips.CodeAnalysis.MaintainabilityAnalyzers.csproj
 
-      - name: Run step if any file(s) in the MoqAnalyzers project change 
-        if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MoqAnalyzers')
-        run: |
-          sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MoqAnalyzers/Philips.CodeAnalysis.MoqAnalyzers.csproj
-
-
+      
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply ${{ steps.semantic.outputs.new_release_version }} version change in csproj file
