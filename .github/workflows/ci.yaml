@@ -16,7 +16,7 @@ jobs:
           echo "${MSG}"
 
       - name : message check
-        if: ${{ !contains(MSG, 'feat') || !contains(MSG, 'fix') }}
+        if: ${{ !contains(${MSG}, 'feat') || !contains(${MSG}, 'fix') }}
         run: exit 1      
 
   semantic-version-update-call:
