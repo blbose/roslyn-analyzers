@@ -6,4 +6,4 @@ jobs:
     
   dotnetcore-call:
     needs: [semantic-version-update-call]
-    uses: blbose/roslyn-analyzers/.github/workflows/dotnetcore.yml@main
+    uses: blbose/roslyn-analyzers/.github/workflows/dotnetcore.yml@latest
