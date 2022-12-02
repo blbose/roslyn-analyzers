@@ -1,3 +1,10 @@
+## [1.2.32](https://github.com/blbose/roslyn-analyzers/compare/v1.2.31...v1.2.32) (2022-12-02)
+
+
+### Bug Fixes
+
+* List of files changed 21 ([575552d](https://github.com/blbose/roslyn-analyzers/commit/575552d033f8bb8f8305e697c4bc63704151c93b))
+
 ## [1.2.31](https://github.com/blbose/roslyn-analyzers/compare/v1.2.30...v1.2.31) (2022-12-02)
 
 
