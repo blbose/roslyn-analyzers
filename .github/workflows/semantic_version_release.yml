@@ -1,6 +1,6 @@
 name: Semantic Version Release
 
-on: [push]  
+on: [workflow_call]  
 
 jobs:
   Semantic-Version-Release:
