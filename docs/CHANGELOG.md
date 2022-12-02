@@ -1,3 +1,11 @@
+# [1.4.0](https://github.com/blbose/roslyn-analyzers/compare/v1.3.0...v1.4.0) (2022-12-02)
+
+
+### Features
+
+* List of files changed 49 ([921e263](https://github.com/blbose/roslyn-analyzers/commit/921e26369279a7f6e15cd0b97f84956204898bc9))
+* List of files changed 51 ([7efc8ce](https://github.com/blbose/roslyn-analyzers/commit/7efc8ce6cc71ecf036faac211939145cf7e6e3c2))
+
 # [1.3.0](https://github.com/blbose/roslyn-analyzers/compare/v1.2.34...v1.3.0) (2022-12-02)
 
 
