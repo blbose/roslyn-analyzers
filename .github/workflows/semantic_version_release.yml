@@ -1,6 +1,6 @@
 name: Semantic Version Release
 
-on: [push]  
+on: [workflow_call]  
 
 jobs:
   Semantic-Version-Release:
@@ -11,28 +11,44 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name : message validation
+        if:  ${{ !(startsWith(github.event.head_commit.message, 'feat') || startsWith(github.event.head_commit.message, 'fix') || startsWith(github.event.head_commit.message, 'BREAKING CHANGE')) }}
+        run: |
+          echo "Commit message :: '${{ github.event.head_commit.message }}' not prefixed with semantic version tags (BREAKING CHANGE: or feat: or fix:)"
+          exit 1
+
       - name: Checkout
         uses: actions/checkout@v3
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
-        id: semantic
-        env:
-          GITHUB_TOKEN: ${{ secrets.NK_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        id: semantic        
         with:
-          semantic_version: 19      
+          semantic_version: 19            
+          extra_plugins: |
+            @semantic-release/git
+            @semantic-release/changelog    
 
-      - name: Get changed files in the MoqAnalyzers folder
+      - name: Get changed files in the code analysis folder
         id: changed-files-specific
         uses: tj-actions/changed-files@v34
         with:
           files: |
             Philips.CodeAnalysis.MaintainabilityAnalyzers/**
-      - name: Run step if any file(s) in the MaintainabilityAnalyzers project change
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
+
+      - name: List all changed files
         run: |
-          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
+
+      - name: Run step if any file(s) in the MaintainabilityAnalyzers project change 
+        if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MaintainabilityAnalyzers')
+        run: |
           sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MaintainabilityAnalyzers/Philips.CodeAnalysis.MaintainabilityAnalyzers.csproj
+          sed -i -e "s+<FileVersion>.*</FileVersion>+<FileVersion>${{ steps.semantic.outputs.new_release_version }}</FileVersion>+g" Philips.CodeAnalysis.MaintainabilityAnalyzers/Philips.CodeAnalysis.MaintainabilityAnalyzers.csproj
+      
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply ${{ steps.semantic.outputs.new_release_version }} version change in csproj file
+
+      
