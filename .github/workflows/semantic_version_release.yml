@@ -39,7 +39,7 @@ jobs:
         if: contains(steps.changed-files-specific.outputs.all_changed_files, 'Philips.CodeAnalysis.MaintainabilityAnalyzers')
         run: |
           sed -i -e "s+<Version>.*</Version>+<Version>${{ steps.semantic.outputs.new_release_version }}</Version>+g" Philips.CodeAnalysis.MaintainabilityAnalyzers/Philips.CodeAnalysis.MaintainabilityAnalyzers.csproj
-
+          sed -i -e "s+<FileVersion>.*</FileVersion>+<FileVersion>${{ steps.semantic.outputs.new_release_version }}</FileVersion>+g" Philips.CodeAnalysis.MaintainabilityAnalyzers/Philips.CodeAnalysis.MaintainabilityAnalyzers.csproj
       
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
