@@ -1,3 +1,10 @@
+## [1.4.10](https://github.com/blbose/roslyn-analyzers/compare/v1.4.9...v1.4.10) (2022-12-16)
+
+
+### Bug Fixes
+
+* commit files to change13 ([91a7793](https://github.com/blbose/roslyn-analyzers/commit/91a7793858553a76c1b79b888179092d47cf6597))
+
 ## [1.4.9](https://github.com/blbose/roslyn-analyzers/compare/v1.4.8...v1.4.9) (2022-12-16)
 
 
