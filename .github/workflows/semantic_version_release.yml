@@ -30,10 +30,7 @@ jobs:
 
       - name: Get changed files in the code analysis folder
         id: changed-files-specific
-        uses: tj-actions/changed-files@v34.6.1
-        with:
-          files: |
-            Philips.CodeAnalysis.MaintainabilityAnalyzers/**
+        uses: tj-actions/changed-files@v34.6.1       
 
       - name: List all changed files
         run: |
