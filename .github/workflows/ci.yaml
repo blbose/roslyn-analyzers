@@ -1,6 +1,4 @@
-on: 
-  pull_request:
-    branches: [ master, release/** ]
+on: [push]
 
 jobs:     
 
