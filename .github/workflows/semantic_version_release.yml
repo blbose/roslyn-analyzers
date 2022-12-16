@@ -23,8 +23,7 @@ jobs:
         uses: cycjimmy/semantic-release-action@v3
         id: semantic  
         env:
-          GITHUB_TOKEN: ${{ secrets.NK_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}      
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}    
         with:
           semantic_version: 19            
           extra_plugins: |
@@ -40,7 +39,7 @@ jobs:
 
       - name: List all changed files
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          for file in ${{ steps.changed-files-specific.outputs.all_changed_files }}; do
             echo "$file was changed"
           done
 
